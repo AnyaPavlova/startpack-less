@@ -1,5 +1,5 @@
-# student-startpack
-Простой сборщик на less для студентов базового курса
+# startpack-less
+Простой сборщик на less
 
 **Version 1.0.5**
 
@@ -56,7 +56,7 @@ gulp serve
 ```
 project
 ├───src
-│   └───styles
+│   └───css
 │       ├───blocks (стили блоков)
 │       │   ├───_header.less
 │       │   ├───_nav.less
@@ -82,7 +82,7 @@ project
     │   ├───script.js
     │   └───etc.
     │
-    ├───style
+    ├───css
     │   ├───style.css (собранный из less файлов - его не трогаем)
     │   └───etc.
     │
