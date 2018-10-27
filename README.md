@@ -7,7 +7,7 @@
 
 Для работы необходимы
 
-* [Node.js](http://nodejs.org) `последней версии`
+* [Node.js](http://nodejs.org) `последней версии LTS`
 * [Gulp](http://gulpjs.com/): `[sudo] npm install -g gulp`
 
 ## Начало работы

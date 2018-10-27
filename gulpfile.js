@@ -13,15 +13,15 @@ const browserSync   = require('browser-sync').create();
 // Path
 const path = {
     www: {
-        style: 'www/style/',
+        style: 'www/css/',
         html : 'www/*.html'
     },
     src: {
-        style: 'src/styles/*.less'
+        style: 'src/css/*.less'
     },
     watch: {
-        srcStyle   : 'src/styles/**/*.less',
-        buildStyle : 'www/style/*.css',
+        srcStyle   : 'src/css/**/*.less',
+        buildStyle : 'www/css/*.css',
         html       : 'www/*.html'
     }
 }
