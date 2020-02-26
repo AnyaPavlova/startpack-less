@@ -1,14 +1,12 @@
 'use strict';
 
-const gulp          = require('gulp');
-
-const less          = require('gulp-less');
-const postcss       = require('gulp-postcss');
-const mqpacker      = require('css-mqpacker');
-const sourcemaps    = require('gulp-sourcemaps');
-const notify        = require('gulp-notify');
-
-const browserSync   = require('browser-sync').create();
+const { series, parallel, src, dest, watch } = require('gulp');
+const less = require('gulp-less');
+const postcss = require('gulp-postcss');
+const mqpacker = require('css-mqpacker');
+const sourcemaps = require('gulp-sourcemaps');
+const notify = require('gulp-notify');
+const browserSync = require('browser-sync').create();
 
 // Path
 const path = {
@@ -27,8 +25,8 @@ const path = {
 }
 
 // Compilation less
-gulp.task('less', function () {
-    return gulp.src(path.src.style)
+function styles() {
+    return src(path.src.style)
         .pipe(sourcemaps.init())
         .pipe(less()
             .on('error', notify.onError({
@@ -44,16 +42,26 @@ gulp.task('less', function () {
             })
         ]))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest(path.www.style));
-});
+        .pipe(dest(path.www.style));
+}
+exports.styles = styles;
 
-// Static Server + watching less files
-gulp.task('serve', ['less'], function() {
-
+function serve() {
     browserSync.init({
         server: "./www"
     });
 
-    gulp.watch(path.watch.srcStyle, ['less']);
-    gulp.watch([path.watch.html, path.watch.buildStyle]).on('change', browserSync.reload);
-});
+    watch([
+        path.watch.srcStyle
+    ], styles);
+
+    watch([
+        path.watch.html,
+        path.watch.buildStyle
+    ]).on('change', browserSync.reload);
+}
+
+exports.default = series(
+  parallel(styles),
+  serve
+);
