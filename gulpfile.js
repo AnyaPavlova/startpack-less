@@ -31,14 +31,14 @@ function styles() {
         .pipe(less()
             .on('error', notify.onError({
                 message: '<%= error.fileName %>' +
-                '\nLine <%= error.lineNumber %>:' +
-                '\n<%= error.message %>',
+                    '\nLine <%= error.lineNumber %>:' +
+                    '\n<%= error.message %>',
                 title  : '<%= error.plugin %>'
             }))
         )
         .pipe(postcss([
             mqpacker({
-                sort: true
+                sort: false
             })
         ]))
         .pipe(sourcemaps.write())
@@ -62,6 +62,6 @@ function serve() {
 }
 
 exports.default = series(
-  parallel(styles),
-  serve
+    parallel(styles),
+    serve
 );
