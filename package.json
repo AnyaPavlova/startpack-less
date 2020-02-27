@@ -1,7 +1,7 @@
 {
   "name": "student-startpack",
-  "version": "1.1.0",
-  "description": "Простой сборщик на less для студентов",
+  "version": "2.0.0",
+  "description": "Cборщик на less",
   "main": "index.js",
   "scripts": {
     "dev": "gulp dev",
@@ -10,8 +10,7 @@
     "images": "gulp images",
     "fonts": "gulp fonts",
     "clean": "gulp clean",
-    "build": "gulp build",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp build"
   },
   "repository": {
     "type": "git",
