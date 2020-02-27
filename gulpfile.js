@@ -1,92 +1,39 @@
 'use strict';
 
-const { series, parallel, src, dest, watch }    = require('gulp');
-const fileinclude                               = require('gulp-file-include');
-const less                                      = require('gulp-less');
-const postcss                                   = require('gulp-postcss');
-const mqpacker                                  = require('css-mqpacker');
-const sourcemaps                                = require('gulp-sourcemaps');
-const notify                                    = require('gulp-notify');
-const browserSync                               = require('browser-sync').create();
+/**
+ * DEPENDENCIES
+ */
+const gulp = require('gulp');
+const fonts = require('./tasks/fonts');
+const svg = require('./tasks/svg');
+const pages = require('./tasks/pages');
+const clean = require('./tasks/clean');
+const server = require('./tasks/server/server').server;
+const watch = require('./tasks/watch');
+const styles = require('./tasks/styles');
+const pluginsJs = require('./tasks/pluginsJs');
+const pluginsCss = require('./tasks/pluginsCss');
+const scripts = require('./tasks/scripts');
+const images = require('./tasks/images');
+const favicons = require('./tasks/favicons');
 
-// Path
-const path = {
-    www: {
-        style: 'www/css/',
-        html : 'www/'
-    },
-    src: {
-        style: 'src/css/*.less',
-        html: 'src/html/*.html'
-    },
-    watch: {
-        srcStyle   : 'src/css/**/*.less',
-        buildStyle : 'www/css/*.css',
-        srcHtml    : 'src/html/**/*.html',
-        html       : 'www/*.html'
-    }
-}
+/**
+ * TASKS
+ */
+gulp.task('favicons', gulp.series(favicons));
 
-// concat html
-function html() {
-    return src(path.src.html)
-        .pipe(fileinclude({
-            prefix: '@@',
-            basepath: '@file'
-        })
-            .on('error', notify.onError({
-                message: '<%= error.fileName %>' +
-                    '\nLine <%= error.lineNumber %>:' +
-                    '\n<%= error.message %>',
-                title  : '<%= error.plugin %>'
-            }))
-        )
-        .pipe(dest(path.www.html));
-}
-exports.html = html;
+gulp.task('svg', gulp.series(svg));
 
-// Compilation less
-function styles() {
-    return src(path.src.style)
-        .pipe(sourcemaps.init())
-        .pipe(less()
-            .on('error', notify.onError({
-                message: '<%= error.fileName %>' +
-                    '\nLine <%= error.lineNumber %>:' +
-                    '\n<%= error.message %>',
-                title  : '<%= error.plugin %>'
-            }))
-        )
-        .pipe(postcss([
-            mqpacker({
-                sort: false
-            })
-        ]))
-        .pipe(sourcemaps.write())
-        .pipe(dest(path.www.style));
-}
-exports.styles = styles;
+gulp.task('images', gulp.series(images));
 
-function serve() {
-    browserSync.init({
-        server: "./www"
-    });
+gulp.task('fonts', gulp.series(fonts));
 
-    watch([
-        path.watch.srcStyle
-    ], styles);
+gulp.task('clean', gulp.series(clean));
 
-    watch([
-        path.watch.srcHtml
-    ], html);
+gulp.task('plugins', gulp.parallel(pluginsCss, pluginsJs));
 
-    watch([
-        path.watch.html,
-        path.watch.buildStyle
-    ]).on('change', browserSync.reload);
-}
+gulp.task('build', gulp.series(clean, gulp.parallel(pages, styles, scripts, svg, images, favicons, fonts, pluginsJs, pluginsCss)));
 
-exports.default = series(
-    parallel(styles, html),
-    serve
-);
+gulp.task('dev', gulp.series(server, watch));
+
+gulp.task('production', gulp.series(clean, 'build'));

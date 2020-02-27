@@ -6,35 +6,43 @@ module.exports = {
         watch: `${buildBase}`
     },
     scripts: {
-        input: `${sourceBase}/**/*.js`,
-        output: `${buildBase}/scripts`
+        watch: `${sourceBase}/js/**/*.js`,
+        input: `${sourceBase}/js/*.js`,
+        output: `${buildBase}/js`
     },
     styles: {
-        base: `${sourceBase}/common/styles/app.scss`,
-        input: `${sourceBase}/**/*.scss`,
-        output: `${buildBase}/styles`
+        input: `${sourceBase}/css/*.less`,
+        watch: `${sourceBase}/css/**/*.less`,
+        output: `${buildBase}/css`
+    },
+    plugins: {
+        inputJs: `${sourceBase}/plugins/**/*.js`,
+        inputCss: `${sourceBase}/plugins/**/*.css`,
+        outputJs: `${buildBase}/js`,
+        outputCss: `${buildBase}/css`
     },
     pages: {
-        input: `${sourceBase}/pages/**/*.twig`,
-        watch: [`${sourceBase}/pages/**/*.twig`, `${sourceBase}/components/**/*.twig`],
-        output: `${buildBase}/pages`
+        input: `${sourceBase}/html/*.html`,
+        watch: `${sourceBase}/html/**/*.html`,
+        output: `${buildBase}`
     },
     fonts: {
-        input: `${sourceBase}/fonts/**/*.{ttf,otf}`,
+        input: `${sourceBase}/fonts/**/*.{ttf,otf,woff,woff2}`,
+        watch: `${sourceBase}/fonts/**/*.{ttf,otf,woff,woff2}`,
         output: `${buildBase}/fonts`
+    },
+    images: {
+        input: `${sourceBase}/images/**/*.{jpg,png,jpeg,webp}`,
+        watch: `${sourceBase}/images/**/*.{jpg,png,jpeg,webp}`,
+        output: `${buildBase}/images`
+    },
+    svg: {
+        input: `${sourceBase}/svg/**/*.svg`,
+        watch: `${sourceBase}/svg/**/*.svg`,
+        output: `${buildBase}/svg`
     },
     favicons: {
         input: `${sourceBase}/favicons/*.{ico,png}`,
         output: `${buildBase}/favicons`
-    },
-    images: {
-        input: `${sourceBase}/components/**/*.{jpg,png,jpeg,webp}`,
-        output: `${buildBase}/images`
-    },
-    svg: {
-        input: `${sourceBase}/components/**/*.svg`,
-        output: `${buildBase}/icons`
-    },
-    NODE_ENV : process.env.NODE_ENV || 'development', // or production
-    isProduction : this.NODE_ENV === 'production'
+    }
 };
