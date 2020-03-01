@@ -24,7 +24,8 @@ module.exports = {
     pages: {
         input: `${sourceBase}/html/*.html`,
         watch: `${sourceBase}/html/**/*.html`,
-        output: `${buildBase}`
+        output: `${buildBase}`,
+        clean: `${buildBase}/*.html`
     },
     fonts: {
         input: `${sourceBase}/fonts/**/*.{ttf,otf,woff,woff2}`,

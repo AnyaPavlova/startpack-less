@@ -11,11 +11,13 @@ const del    = require('del');
  */
 function clean() {
     return del([
-        config.pages.output,
+        config.pages.clean,
         config.scripts.output,
         config.styles.output,
         config.fonts.output,
-        config.images.output
+        config.images.output,
+        config.svg.output,
+        config.favicons.output
     ]);
 }
 

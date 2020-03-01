@@ -10,6 +10,7 @@
     "images": "gulp images",
     "fonts": "gulp fonts",
     "clean": "gulp clean",
+    "php": "gulp php",
     "build": "gulp build"
   },
   "repository": {
