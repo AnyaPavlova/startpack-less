@@ -8,9 +8,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 console.log('tupo test');
 
-var Test =
-/*#__PURE__*/
-function () {
+var Test = /*#__PURE__*/function () {
   function Test(options) {
     _classCallCheck(this, Test);
 

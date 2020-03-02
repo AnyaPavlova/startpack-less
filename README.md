@@ -117,7 +117,6 @@ project
 │   ├───images
 │   ├───fonts
 │   ├───favicons
-│   └───svg
 │
 ├───tasks (gulp tasks - ннадо для сборки)
 │   

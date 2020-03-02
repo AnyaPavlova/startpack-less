@@ -33,14 +33,14 @@ module.exports = {
         output: `${buildBase}/fonts`
     },
     images: {
-        input: `${sourceBase}/images/**/*.{jpg,png,jpeg,webp}`,
-        watch: `${sourceBase}/images/**/*.{jpg,png,jpeg,webp}`,
+        input: `${sourceBase}/images/**/*.{jpg,png,jpeg,webp,gif}`,
+        watch: `${sourceBase}/images/**/*.{jpg,png,jpeg,webp,gif}`,
         output: `${buildBase}/images`
     },
     svg: {
-        input: `${sourceBase}/svg/**/*.svg`,
-        watch: `${sourceBase}/svg/**/*.svg`,
-        output: `${buildBase}/svg`
+        input: `${sourceBase}/images/**/*.svg`,
+        watch: `${sourceBase}/images/**/*.svg`,
+        output: `${buildBase}/images`
     },
     favicons: {
         input: `${sourceBase}/favicons/*.{ico,png}`,
